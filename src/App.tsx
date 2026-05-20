@@ -21,6 +21,38 @@ export default function App() {
     <div className="min-h-screen bg-bg">
       <NetflixIntro onComplete={() => setIntroComplete(true)} />
 
+      {/* Ambient glow blobs — fixed, behind everything */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+        {/* Red — top center (hero area) */}
+        <div style={{
+          position: 'absolute', top: '-5%', left: '25%',
+          width: 900, height: 700,
+          background: 'radial-gradient(ellipse, rgba(204,34,0,0.055) 0%, transparent 70%)',
+          filter: 'blur(80px)', transform: 'translateZ(0)',
+        }} />
+        {/* Blue — mid right (experience / projects) */}
+        <div style={{
+          position: 'absolute', top: '30%', right: '-8%',
+          width: 700, height: 800,
+          background: 'radial-gradient(ellipse, rgba(53,114,165,0.045) 0%, transparent 70%)',
+          filter: 'blur(100px)', transform: 'translateZ(0)',
+        }} />
+        {/* Purple — mid left (skills) */}
+        <div style={{
+          position: 'absolute', top: '58%', left: '-8%',
+          width: 700, height: 700,
+          background: 'radial-gradient(ellipse, rgba(168,85,247,0.04) 0%, transparent 70%)',
+          filter: 'blur(100px)', transform: 'translateZ(0)',
+        }} />
+        {/* Teal — bottom right (recommendations / contact) */}
+        <div style={{
+          position: 'absolute', bottom: '-5%', right: '15%',
+          width: 650, height: 550,
+          background: 'radial-gradient(ellipse, rgba(0,201,177,0.035) 0%, transparent 70%)',
+          filter: 'blur(90px)', transform: 'translateZ(0)',
+        }} />
+      </div>
+
       {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 z-[100] origin-left"
@@ -32,6 +64,8 @@ export default function App() {
       />
 
       <motion.div
+        className="relative"
+        style={{ zIndex: 1 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: introComplete ? 1 : 0 }}
         transition={{ duration: 0.4 }}
