@@ -1,34 +1,85 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-export default function Hero() {
+const letterVariant = {
+  hidden: { y: '115%', opacity: 0 },
+  visible: (i: number) => ({
+    y: '0%',
+    opacity: 1,
+    transition: { duration: 0.65, delay: 0.5 + i * 0.04, ease: [0.16, 1, 0.3, 1] },
+  }),
+}
+
+function SplitText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  return (
+    <span className={className} style={{ ...style, display: 'inline-flex', gap: '0.01em' }}>
+      {text.split('').map((char, i) => (
+        <span key={i} style={{ display: 'inline-block', overflow: 'hidden' }}>
+          <motion.span
+            style={{ display: 'inline-block' }}
+            variants={letterVariant}
+            custom={i}
+          >
+            {char === ' ' ? ' ' : char}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  )
+}
+
+export default function Hero({ introComplete }: { introComplete: boolean }) {
   const [loaded, setLoaded] = useState(false)
-  useEffect(() => { const t = setTimeout(() => setLoaded(true), 100); return () => clearTimeout(t) }, [])
+
+  useEffect(() => {
+    if (!introComplete) return
+    const t = setTimeout(() => setLoaded(true), 80)
+    return () => clearTimeout(t)
+  }, [introComplete])
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background — headshot with dark overlay */}
+      {/* Background — Ken Burns */}
       <div className="absolute inset-0">
-        <img
-          src="/profile.jpg"
-          alt=""
-          className="w-full h-full object-cover object-center"
-          onError={e => { e.currentTarget.style.display = 'none' }}
-        />
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.08 }}
+          transition={{ duration: 22, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
+        >
+          <img
+            src="/profile.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            onError={e => { e.currentTarget.style.display = 'none' }}
+          />
+        </motion.div>
+
+        {/* Scan line — sweeps down once on load */}
+        {loaded && (
+          <motion.div
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{ height: 2, background: 'linear-gradient(90deg, transparent, rgba(204,34,0,0.6), transparent)', zIndex: 2 }}
+            initial={{ top: '-1%' }}
+            animate={{ top: '105%' }}
+            transition={{ duration: 1.8, delay: 0.2, ease: 'linear' }}
+          />
+        )}
+
         {/* Netflix-style gradient overlays */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.5) 70%, rgba(10,10,10,0.2) 100%)',
+          background: 'linear-gradient(to right, rgba(10,10,10,0.97) 35%, rgba(10,10,10,0.55) 65%, rgba(10,10,10,0.15) 100%)',
         }} />
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.4) 40%, transparent 70%)',
+          background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 40%, transparent 70%)',
         }} />
       </div>
 
       {/* AISHFLIX side label */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? 0.4 : 0 }}
-        transition={{ delay: 1.5 }}
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: loaded ? 0.35 : 0, x: loaded ? 0 : 10 }}
+        transition={{ delay: 2.0, duration: 0.8 }}
         className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none select-none"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
@@ -38,12 +89,17 @@ export default function Hero() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8 pb-24 pt-32 w-full">
+      <motion.div
+        className="relative z-10 max-w-[1400px] mx-auto px-8 pb-24 pt-32 w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
         {/* AISHFLIX branding */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 10 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, x: -15 }}
+          animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : -15 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
           className="flex items-center gap-3 mb-5"
         >
           <span
@@ -57,28 +113,39 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Name */}
-        <div className="overflow-hidden mb-4">
-          <motion.h1
-            className="font-display font-black text-white leading-[0.88] tracking-tight"
-            style={{ fontSize: 'clamp(4.5rem, 14vw, 11rem)' }}
-            initial={{ y: '100%' }}
-            animate={{ y: loaded ? '0%' : '100%' }}
-            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            AISHVARYA<br />SALVI
-          </motion.h1>
-        </div>
+        {/* Name — character reveal */}
+        <motion.div
+          initial="hidden"
+          animate={loaded ? 'visible' : 'hidden'}
+          className="mb-4"
+          style={{ lineHeight: 0.88 }}
+        >
+          <div style={{ fontSize: 'clamp(4.5rem, 14vw, 11rem)', fontFamily: 'var(--font-display)', fontWeight: 900 }}>
+            <div style={{ overflow: 'hidden' }}>
+              <SplitText text="AISHVARYA" />
+            </div>
+            <div style={{ overflow: 'hidden' }}>
+              <SplitText
+                text="SALVI"
+                style={{ color: '#fff' }}
+              />
+            </div>
+          </div>
+        </motion.div>
 
         {/* Meta row */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 10 }}
-          transition={{ delay: 0.9 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 12 }}
+          transition={{ delay: 1.1, duration: 0.5 }}
           className="flex flex-wrap items-center gap-3 mb-5"
         >
           <span className="match-badge flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-[#4ade80]"
+              animate={{ scale: [1, 1.6, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
             96% Match
           </span>
           <span className="font-mono text-xs text-[#a3a3a3]">2025</span>
@@ -91,7 +158,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: loaded ? 1 : 0 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 1.3, duration: 0.6 }}
           className="text-[#a3a3a3] text-sm leading-relaxed mb-8 max-w-lg"
         >
           An AI/Data Engineer with 4+ years architecting agentic LLM
@@ -102,9 +169,9 @@ export default function Hero() {
 
         {/* Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 10 }}
-          transition={{ delay: 1.3 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 12 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
           className="flex flex-wrap gap-3"
         >
           <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-primary-nf">
@@ -126,7 +193,7 @@ export default function Hero() {
             MY LIST
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
