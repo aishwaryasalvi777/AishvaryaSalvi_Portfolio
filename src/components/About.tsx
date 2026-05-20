@@ -89,7 +89,7 @@ export default function About() {
         >
           <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
             <img
-              src="/profile.jpg"
+              src="/about.jpg"
               alt="Aishvarya Salvi"
               className="w-full h-full object-cover object-top"
               onError={e => {
