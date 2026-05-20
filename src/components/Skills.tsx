@@ -1,6 +1,53 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { skillGroups, SkillGroup } from '../data/skills'
+import {
+  SiPython, SiR, SiPandas, SiNumpy, SiScikitlearn,
+  SiLangchain, SiOpenai, SiAnthropic, SiPydantic, SiHuggingface,
+  SiSnowflake, SiPostgresql, SiMysql, SiApacheairflow, SiFastapi,
+  SiDocker, SiJenkins, SiGithub,
+  SiStreamlit,
+} from 'react-icons/si'
+import { FaMicrosoft, FaAws } from 'react-icons/fa6'
+
+type IconComp = React.ComponentType<{ size?: number }>
+
+const SKILL_ICONS: Record<string, IconComp> = {
+  // Programming
+  Python:             SiPython,
+  R:                  SiR,
+  Pandas:             SiPandas,
+  NumPy:              SiNumpy,
+  'Scikit-learn':     SiScikitlearn,
+  // GenAI
+  LangChain:          SiLangchain,
+  'OpenAI API':       SiOpenai,
+  'Claude API':       SiAnthropic,
+  Pydantic:           SiPydantic,
+  'sentence-transformers': SiHuggingface,
+  pgvector:           SiPostgresql,
+  // Data Engineering
+  Snowflake:          SiSnowflake,
+  PostgreSQL:         SiPostgresql,
+  MySQL:              SiMysql,
+  'Apache Airflow':   SiApacheairflow,
+  FastAPI:            SiFastapi,
+  // Cloud
+  'Azure Data Factory':  FaMicrosoft,
+  'Azure Blob Storage':  FaMicrosoft,
+  'Azure Key Vault':     FaMicrosoft,
+  'AWS S3':              FaAws,
+  'AWS EC2':             FaAws,
+  'AWS RDS':             FaAws,
+  Redshift:              FaAws,
+  Docker:                SiDocker,
+  'Docker Compose':      SiDocker,
+  Jenkins:               SiJenkins,
+  'Git/GitHub':          SiGithub,
+  // BI
+  'Power BI':            FaMicrosoft,
+  Streamlit:             SiStreamlit,
+}
 
 const GROUP_META = [
   { color: '#3572A5', rgb: '53,114,165',   num: '01' },
@@ -78,28 +125,32 @@ function BentoCard({
 
       {/* Skill pills */}
       <div className="flex flex-wrap gap-2 relative z-10">
-        {group.skills.map((skill, si) => (
-          <motion.span
-            key={skill}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: delay + 0.15 + si * 0.028, ease: 'backOut' }}
-            className="px-3 py-1 text-[11px] font-mono cursor-default rounded-sm"
-            style={{
-              border: `1px solid rgba(${rgb},0.22)`,
-              background: `rgba(${rgb},0.07)`,
-              color: '#a3a3a3',
-              transition: 'background 0.15s, border-color 0.15s, color 0.15s',
-            }}
-            whileHover={{
-              backgroundColor: `rgba(${rgb},0.18)`,
-              borderColor: color,
-              color: '#ffffff',
-            }}
-          >
-            {skill}
-          </motion.span>
-        ))}
+        {group.skills.map((skill, si) => {
+          const Icon = SKILL_ICONS[skill]
+          return (
+            <motion.span
+              key={skill}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: delay + 0.15 + si * 0.028, ease: 'backOut' }}
+              className="px-3 py-1 text-[11px] font-mono cursor-default rounded-sm flex items-center gap-1.5"
+              style={{
+                border: `1px solid rgba(${rgb},0.22)`,
+                background: `rgba(${rgb},0.07)`,
+                color: '#a3a3a3',
+                transition: 'background 0.15s, border-color 0.15s, color 0.15s',
+              }}
+              whileHover={{
+                backgroundColor: `rgba(${rgb},0.18)`,
+                borderColor: color,
+                color: '#ffffff',
+              }}
+            >
+              {Icon && <Icon size={12} />}
+              {skill}
+            </motion.span>
+          )
+        })}
       </div>
 
       {/* Bottom fill bar — relative to 12 max skills */}

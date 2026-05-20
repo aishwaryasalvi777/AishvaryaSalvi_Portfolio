@@ -127,7 +127,7 @@ export default function About() {
             {[
               { href: 'https://github.com/aishwaryasalvi777', label: 'GITHUB ↗' },
               { href: 'https://www.linkedin.com/in/aishvaryasalvi', label: 'LINKEDIN ↗' },
-              { href: '/resume.pdf', label: '↓ DOWNLOAD RESUME', target: '_blank' },
+              { href: '/Aishvarya_Salvi_AIDE_Generic.pdf', label: '↓ DOWNLOAD RESUME', target: '_blank' },
             ].map(link => (
               <a
                 key={link.label}
