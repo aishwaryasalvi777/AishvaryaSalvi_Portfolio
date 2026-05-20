@@ -63,7 +63,8 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
             <img
               src={src}
               alt=""
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: '65% center' }}
               onError={e => { e.currentTarget.style.display = 'none' }}
             />
           </motion.div>
@@ -80,16 +81,15 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
           />
         )}
 
-        {/* Base dark layer — tames bright outdoor photos */}
-        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.52)', zIndex: 2 }} />
-        {/* Directional gradients */}
+        {/* Left→right gradient: text area stays dark, person visible on right */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to right, rgba(10,10,10,0.98) 30%, rgba(10,10,10,0.7) 60%, rgba(10,10,10,0.25) 100%)',
-          zIndex: 3,
+          background: 'linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,0.97) 35%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.05) 100%)',
+          zIndex: 2,
         }} />
+        {/* Bottom gradient so buttons/meta stay readable */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.6) 35%, transparent 65%)',
-          zIndex: 3,
+          background: 'linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 25%, transparent 55%)',
+          zIndex: 2,
         }} />
       </div>
 
