@@ -51,6 +51,7 @@ function StatCounter({ stat, inView, index }: { stat: typeof stats[number]; inVi
   )
 }
 
+
 export default function About() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true })
 
@@ -161,10 +162,7 @@ export default function About() {
                 if (fb) fb.style.display = 'flex'
               }}
             />
-            <div
-              className="w-full h-full items-center justify-center hidden"
-              style={{ background: '#111' }}
-            >
+            <div className="w-full h-full items-center justify-center hidden" style={{ background: '#111' }}>
               <span className="font-display font-black text-8xl text-white/10 select-none">AS</span>
             </div>
           </div>
