@@ -60,7 +60,7 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/aishvarya-salvi"
+              href="https://www.linkedin.com/in/aishvaryasalvi"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
