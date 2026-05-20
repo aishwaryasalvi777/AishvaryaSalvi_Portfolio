@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { cursor: none !important; }
+
+@layer base {
+  html { scroll-behavior: smooth; background: #0a0a0a; }
+
+  body {
+    @apply bg-bg text-white font-sans overflow-x-hidden;
+    background: #0a0a0a;
+  }
+
+  ::selection { background: rgba(204,34,0,0.3); color: #fff; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #cc2200; }
+}
+
+@layer components {
+  .section-label {
+    @apply flex items-center gap-2 font-mono text-xs tracking-[0.25em] uppercase mb-4;
+    color: #a3a3a3;
+  }
+
+  .section-label .dot {
+    @apply w-1.5 h-1.5 rounded-full flex-shrink-0;
+    background: #cc2200;
+  }
+
+  .section-label .num {
+    color: #cc2200;
+    font-weight: 700;
+  }
+
+  .section-heading {
+    @apply font-display font-black text-white leading-[0.92] tracking-tight;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .accent-word { color: #cc2200; }
+
+  .netflix-card {
+    @apply rounded-sm overflow-hidden relative;
+    background: #111111;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .netflix-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .match-badge {
+    @apply font-mono text-xs font-bold;
+    color: #4ade80;
+  }
+
+  .tag-pill {
+    @apply px-3 py-1 rounded-sm text-xs font-mono;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #a3a3a3;
+  }
+
+  .btn-primary-nf {
+    @apply px-6 py-3 font-display font-bold text-sm tracking-wide flex items-center gap-2 transition-all duration-200;
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .btn-primary-nf:hover { background: #e0e0e0; }
+
+  .btn-secondary-nf {
+    @apply px-6 py-3 font-display font-bold text-sm tracking-wide flex items-center gap-2 transition-all duration-200;
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .btn-secondary-nf:hover { background: rgba(255,255,255,0.2); }
+
+  .divider {
+    @apply w-full;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+}
+
+@layer utilities {
+  .text-muted { color: #a3a3a3; }
+  .text-faint { color: #525252; }
+
+  .horizontal-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a transparent;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar { height: 3px; }
+  .horizontal-scroll::-webkit-scrollbar-track { background: transparent; }
+  .horizontal-scroll::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+}
