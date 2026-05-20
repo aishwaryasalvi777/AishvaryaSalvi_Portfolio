@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useGitHubProjects } from '../hooks/useGitHubProjects'
+import { getRepoImage } from '../data/projectImages'
 
 const langColors: Record<string, string> = {
   Python: '#3572A5', TypeScript: '#3178c6', JavaScript: '#f1e05a',
@@ -21,7 +22,7 @@ const langGradients: Record<string, string> = {
   CSS:        'linear-gradient(135deg, #130d1a 0%, #2a1540 100%)',
 }
 
-const CARD_STEP = 3 * 320 // jump 3 cards on arrow click
+const CARD_STEP = 3 * 320
 
 export default function Projects() {
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true })
@@ -152,6 +153,7 @@ export default function Projects() {
               const idx = i % 12
               const langColor = langColors[repo.language ?? ''] ?? '#525252'
               const bg = langGradients[repo.language ?? ''] ?? 'linear-gradient(135deg, #111 0%, #1c1c1c 100%)'
+              const repoImg = getRepoImage(repo.name)
 
               return (
                 <motion.a
@@ -166,9 +168,16 @@ export default function Projects() {
                   {/* Poster */}
                   <div
                     className="relative overflow-hidden flex flex-col justify-between p-4"
-                    style={{ height: 180, background: bg }}
+                    style={{
+                      height: 180,
+                      background: repoImg ? `url(${repoImg}) center/cover no-repeat` : bg,
+                    }}
                   >
-                    <div className="flex items-start justify-between">
+                    {/* Dark overlay when image is present so text stays readable */}
+                    {repoImg && (
+                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 100%)', zIndex: 0 }} />
+                    )}
+                    <div className="flex items-start justify-between relative z-10">
                       <div className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-sm"
                         style={{ background: '#cc2200', color: '#fff' }}>
                         TOP {idx + 1}
