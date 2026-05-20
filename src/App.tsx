@@ -12,6 +12,36 @@ import Skills from './components/Skills'
 import Recommendations from './components/Recommendations'
 import Contact from './components/Contact'
 
+// Alternates between two cinematic scroll-in styles
+const sectionVariants = [
+  // fade-up + slight scale
+  {
+    initial: { opacity: 0, y: 72, scale: 0.97 },
+    whileInView: { opacity: 1, y: 0, scale: 1 },
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+  },
+  // blur-up
+  {
+    initial: { opacity: 0, y: 48, filter: 'blur(10px)' },
+    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+]
+
+function AnimatedSection({ children, index }: { children: React.ReactNode; index: number }) {
+  const v = sectionVariants[index % 2]
+  return (
+    <motion.div
+      initial={v.initial}
+      whileInView={v.whileInView}
+      viewport={{ once: true, margin: '-90px' }}
+      transition={v.transition}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export default function App() {
   const [introComplete, setIntroComplete] = useState(false)
   const { scrollYProgress } = useScroll()
@@ -73,14 +103,14 @@ export default function App() {
         <Navbar />
         <main>
           <Hero introComplete={introComplete} />
-          <About />
-          <Experience />
-          <Projects />
-          <StarredProjects />
-          <Education />
-          <Skills />
-          <Recommendations />
-          <Contact />
+          <AnimatedSection index={0}><About /></AnimatedSection>
+          <AnimatedSection index={1}><Experience /></AnimatedSection>
+          <AnimatedSection index={0}><Projects /></AnimatedSection>
+          <AnimatedSection index={1}><StarredProjects /></AnimatedSection>
+          <AnimatedSection index={0}><Education /></AnimatedSection>
+          <AnimatedSection index={1}><Skills /></AnimatedSection>
+          <AnimatedSection index={0}><Recommendations /></AnimatedSection>
+          <AnimatedSection index={1}><Contact /></AnimatedSection>
         </main>
       </motion.div>
     </div>
