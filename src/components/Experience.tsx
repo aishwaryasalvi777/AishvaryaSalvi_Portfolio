@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState } from 'react'
 import { experience } from '../data/experience'
+import { useTilt } from '../hooks/useTilt'
 import {
   SiLangchain, SiFastapi, SiOpenai, SiDocker, SiStreamlit,
   SiSnowflake, SiPython, SiJenkins, SiJira, SiPostman,
@@ -194,6 +195,7 @@ function ExperienceCard({
   const isCurrent = i === 0
   const fromX = i % 2 === 0 ? -70 : 70
   const accent = CARD_ACCENT[i] ?? CARD_ACCENT[0]
+  const tilt = useTilt(6)
 
   return (
     <motion.div
@@ -203,7 +205,9 @@ function ExperienceCard({
       transition={{ duration: 0.75, ease: [0.25, 1, 0.5, 1] }}
       whileHover="hovered"
       className="netflix-card group flex flex-col relative overflow-hidden cursor-pointer"
-      style={{ isolation: 'isolate' }}
+      style={{ isolation: 'isolate', rotateX: tilt.rotateX, rotateY: tilt.rotateY, transformPerspective: tilt.transformPerspective }}
+      onMouseMove={tilt.onMouseMove}
+      onMouseLeave={tilt.onMouseLeave}
     >
       {/* Poster */}
       <div className="relative flex-shrink-0" style={{ aspectRatio: '16/9', minHeight: 220 }}>

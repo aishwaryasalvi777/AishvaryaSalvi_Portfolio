@@ -167,14 +167,6 @@ export default function About() {
             >
               <span className="font-display font-black text-8xl text-white/10 select-none">AS</span>
             </div>
-            {/* Bottom overlay */}
-            <div
-              className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between"
-              style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }}
-            >
-              <span className="font-mono text-xs text-[#a3a3a3] uppercase tracking-widest">Buffalo, NY</span>
-              <span className="font-mono text-xs text-[#a3a3a3]">+1 716·465·7631</span>
-            </div>
           </div>
         </motion.div>
       </div>

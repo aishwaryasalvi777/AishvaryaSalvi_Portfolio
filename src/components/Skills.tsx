@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { skillGroups, SkillGroup } from '../data/skills'
+import { useTilt } from '../hooks/useTilt'
 import {
   SiPython, SiR, SiPandas, SiNumpy, SiScikitlearn,
   SiLangchain, SiOpenai, SiAnthropic, SiPydantic, SiHuggingface,
@@ -66,6 +67,7 @@ function BentoCard({
 }) {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
   const { color, rgb, num } = meta
+  const tilt = useTilt(5)
 
   return (
     <motion.div
@@ -73,7 +75,6 @@ function BentoCard({
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.25, 1, 0.5, 1] }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="relative overflow-hidden rounded-sm p-6"
       style={{
         background: `linear-gradient(135deg, #111111 0%, rgba(${rgb},0.07) 100%)`,
@@ -81,12 +82,17 @@ function BentoCard({
         borderTopColor: color,
         borderTopWidth: 3,
         minHeight: 260,
+        rotateX: tilt.rotateX,
+        rotateY: tilt.rotateY,
+        transformPerspective: tilt.transformPerspective,
       }}
+      onMouseMove={tilt.onMouseMove}
       onMouseEnter={e => {
         ;(e.currentTarget as HTMLDivElement).style.boxShadow =
           `0 20px 60px rgba(${rgb},0.14), 0 0 0 1px rgba(${rgb},0.15)`
       }}
       onMouseLeave={e => {
+        tilt.onMouseLeave()
         ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
       }}
     >

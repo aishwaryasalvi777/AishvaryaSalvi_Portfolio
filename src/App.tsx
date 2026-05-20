@@ -11,6 +11,7 @@ import Education from './components/Education'
 import Skills from './components/Skills'
 import Recommendations from './components/Recommendations'
 import Contact from './components/Contact'
+import CursorSpotlight from './components/CursorSpotlight'
 
 // Alternates between two cinematic scroll-in styles
 const sectionVariants = [
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <CursorSpotlight />
       <NetflixIntro onComplete={() => setIntroComplete(true)} />
 
       {/* Ambient glow blobs — fixed, behind everything */}
