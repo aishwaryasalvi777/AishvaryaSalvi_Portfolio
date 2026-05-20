@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
+const SLIDES = ['/profile.jpg', '/hero2.jpg', '/hero3.jpg', '/hero4.jpg']
+const SLIDE_DURATION = 4000
+
 const letterVariant = {
   hidden: { y: '115%', opacity: 0 },
   visible: (i: number) => ({
@@ -30,6 +33,7 @@ function SplitText({ text, className, style }: { text: string; className?: strin
 
 export default function Hero({ introComplete }: { introComplete: boolean }) {
   const [loaded, setLoaded] = useState(false)
+  const [activeSlide, setActiveSlide] = useState(0)
 
   useEffect(() => {
     if (!introComplete) return
@@ -37,41 +41,55 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
     return () => clearTimeout(t)
   }, [introComplete])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide(i => (i + 1) % SLIDES.length)
+    }, SLIDE_DURATION)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background — Ken Burns */}
+      {/* Background — slideshow with crossfade + Ken Burns per slide */}
       <div className="absolute inset-0">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.08 }}
-          transition={{ duration: 22, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
-        >
-          <img
-            src="/profile.jpg"
-            alt=""
-            className="w-full h-full object-cover object-center"
-            onError={e => { e.currentTarget.style.display = 'none' }}
-          />
-        </motion.div>
+        {SLIDES.map((src, i) => (
+          <motion.div
+            key={src}
+            className="absolute inset-0"
+            animate={{ opacity: i === activeSlide ? 1 : 0, scale: i === activeSlide ? 1.06 : 1 }}
+            transition={{ opacity: { duration: 1.2, ease: 'easeInOut' }, scale: { duration: SLIDE_DURATION / 1000, ease: 'linear' } }}
+            style={{ zIndex: i === activeSlide ? 1 : 0 }}
+          >
+            <img
+              src={src}
+              alt=""
+              className="w-full h-full object-cover object-center"
+              onError={e => { e.currentTarget.style.display = 'none' }}
+            />
+          </motion.div>
+        ))}
 
         {/* Scan line — sweeps down once on load */}
         {loaded && (
           <motion.div
             className="absolute left-0 right-0 pointer-events-none"
-            style={{ height: 2, background: 'linear-gradient(90deg, transparent, rgba(204,34,0,0.6), transparent)', zIndex: 2 }}
+            style={{ height: 2, background: 'linear-gradient(90deg, transparent, rgba(204,34,0,0.6), transparent)', zIndex: 4 }}
             initial={{ top: '-1%' }}
             animate={{ top: '105%' }}
             transition={{ duration: 1.8, delay: 0.2, ease: 'linear' }}
           />
         )}
 
-        {/* Netflix-style gradient overlays */}
+        {/* Base dark layer — tames bright outdoor photos */}
+        <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.52)', zIndex: 2 }} />
+        {/* Directional gradients */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to right, rgba(10,10,10,0.97) 35%, rgba(10,10,10,0.55) 65%, rgba(10,10,10,0.15) 100%)',
+          background: 'linear-gradient(to right, rgba(10,10,10,0.98) 30%, rgba(10,10,10,0.7) 60%, rgba(10,10,10,0.25) 100%)',
+          zIndex: 3,
         }} />
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 40%, transparent 70%)',
+          background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.6) 35%, transparent 65%)',
+          zIndex: 3,
         }} />
       </div>
 
@@ -120,7 +138,7 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
           className="mb-4"
           style={{ lineHeight: 0.88 }}
         >
-          <div style={{ fontSize: 'clamp(4.5rem, 14vw, 11rem)', fontFamily: 'var(--font-display)', fontWeight: 900 }}>
+          <div style={{ fontSize: 'clamp(4.5rem, 14vw, 11rem)', fontFamily: 'var(--font-display)', fontWeight: 900, textShadow: '0 4px 40px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.9)' }}>
             <div style={{ overflow: 'hidden' }}>
               <SplitText text="AISHVARYA" />
             </div>
