@@ -93,15 +93,17 @@ export default function About() {
           >
             <p>
               I'm an AI/Data Engineer with <strong className="text-white">5+ years of experience</strong> shipping
-              agentic LLM systems, RAG pipelines, and production ETL/ELT on Azure and AWS.
-              Currently at the Research Foundation for SUNY, I architect supply-chain risk
-              agents that procurement teams actually use.
+              agentic LLM systems, RAG pipelines, and production forecasting on Azure, AWS,
+              and Snowflake. Currently at Mediaocean, I build AI systems that replace manual
+              QA across 100+ repos and 15k+ tests — including a multi-agent RAG failure
+              classifier that cut classification latency 90x.
             </p>
             <p>
               I care about the bridge between LLM capability and stakeholder trust —
-              calibrated risk scores, plain-language SHAP explanations, audit-grade
-              reasoning traces. Currently exploring multi-agent verification,
-              demand-forecasting models, and the quiet art of making 1,000+ raw tables behave.
+              deterministic decision gates, plain-language SHAP explanations, and AI tools
+              non-technical teams can rely on. Before this, I shipped a CatBoost demand
+              forecasting pipeline at New Era Cap (92% accuracy) and spent four years at
+              Mediaocean raising test coverage from 60% to 95%.
             </p>
           </motion.div>
 

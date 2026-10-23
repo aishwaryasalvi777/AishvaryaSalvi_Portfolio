@@ -8,6 +8,8 @@ export interface ExperienceItem {
   type: 'full-time' | 'contract' | 'internship'
   highlights: string[]
   tags: string[]
+  image?: string
+  imagePosition?: string
 }
 
 export const experience: ExperienceItem[] = [
@@ -26,6 +28,8 @@ export const experience: ExperienceItem[] = [
       'Collaborated with Automation, Engineering, and Data Science leadership in Agile/Scrum, shipped LLM based stakeholder tools, driving a 60% reduction in manual QA effort.',
     ],
     tags: ['RAG', 'pgvector', 'Docker', 'FastAPI', 'Ollama', 'nginx', 'CI/CD', 'JIRA'],
+    image: '/experience/mediaocean-ai.jpeg',
+    imagePosition: 'center 30%',
   },
   {
     id: 2,
@@ -41,6 +45,8 @@ export const experience: ExperienceItem[] = [
       'Built a Power BI dashboard and a GenAI-powered Streamlit app (FastAPI + OpenAI API) translating SHAP feature importance into natural-language explanations for non-technical stakeholders.',
     ],
     tags: ['Azure', 'Snowflake', 'CatBoost', 'Power BI', 'FastAPI', 'OpenAI', 'Streamlit', 'ETL/ELT'],
+    image: '/experience/newera.jpeg',
+    imagePosition: 'center 58%',
   },
   {
     id: 3,
@@ -54,5 +60,7 @@ export const experience: ExperienceItem[] = [
       'Engineered SQL-based validation and Power BI reporting, improving test coverage from 60% to 95% and cutting escaped defects by 40% and resolution time by 30%.',
     ],
     tags: ['Karate', 'Selenium', 'Jenkins', 'Docker', 'SQL', 'Power BI', 'CI/CD'],
+    image: '/experience/mediaocean-swe.jpeg',
+    imagePosition: 'center 30%',
   },
 ]

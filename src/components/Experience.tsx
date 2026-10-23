@@ -186,7 +186,20 @@ function ExperienceCard({
     >
       {/* Poster */}
       <div className="relative flex-shrink-0" style={{ aspectRatio: '16/9', minHeight: 220 }}>
-        <Poster className="absolute inset-0" />
+        {item.image ? (
+          <>
+            <img
+              src={item.image}
+              alt={`${item.role} at ${item.company}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: item.imagePosition ?? 'center' }}
+            />
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0) 30%, rgba(10,10,10,0) 70%, rgba(10,10,10,0.45) 100%)' }} />
+          </>
+        ) : (
+          <Poster className="absolute inset-0" />
+        )}
 
         {/* Scan line sweeps down on entry */}
         <motion.div
