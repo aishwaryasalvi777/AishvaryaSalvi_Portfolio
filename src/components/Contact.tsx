@@ -41,7 +41,6 @@ export default function Contact() {
           <div className="space-y-4 font-mono text-sm">
             {[
               { icon: '✉', label: 'aishwarya.salvi28@gmail.com', href: 'mailto:aishwarya.salvi28@gmail.com' },
-              { icon: '◎', label: '+1 716-465-7631', href: 'tel:+17164657631' },
               { icon: '◈', label: 'github.com/aishwaryasalvi777', href: 'https://github.com/aishwaryasalvi777' },
               { icon: '◉', label: 'linkedin.com/in/aishvaryasalvi', href: 'https://www.linkedin.com/in/aishvaryasalvi' },
             ].map(item => (

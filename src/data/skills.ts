@@ -7,41 +7,50 @@ export interface SkillGroup {
 
 export const skillGroups: SkillGroup[] = [
   {
-    category: 'Programming & Analytics',
+    category: 'Programming & Frameworks',
     icon: '⌨️',
     color: 'cyan',
-    skills: ['Python', 'SQL', 'R', 'Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'CatBoost', 'LightGBM'],
+    skills: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'FastAPI', 'REST APIs', 'React'],
   },
   {
-    category: 'GenAI & Agentic Systems',
+    category: 'AI & LLM Engineering',
     icon: '🤖',
     color: 'purple',
     skills: [
-      'LangChain', 'LangGraph', 'RAG', 'ReAct Agents',
-      'OpenAI API', 'Claude API', 'Pinecone', 'pgvector',
-      'sentence-transformers', 'LLM-as-judge', 'Pydantic',
+      'Anthropic Claude', 'OpenAI', 'Ollama', 'Prompt Engineering',
+      'Agentic Workflows', 'LangChain', 'LangGraph', 'Multi-Agent Orchestration',
+      'RAG', 'Pinecone', 'pgvector', 'Semantic Search',
     ],
   },
   {
-    category: 'Data Engineering & Warehouses',
-    icon: '🗄️',
-    color: 'cyan',
-    skills: ['ETL/ELT', 'Snowflake', 'PostgreSQL', 'MySQL', 'Apache Airflow', 'FastAPI'],
+    category: 'ML & Data Science',
+    icon: '🧠',
+    color: 'purple',
+    skills: [
+      'XGBoost', 'LightGBM', 'CatBoost', 'ARIMA', 'SARIMA',
+      'Classification', 'Model Evaluation', 'Feature Engineering',
+      'SHAP', 'Apache Airflow', 'Jenkins',
+    ],
   },
   {
-    category: 'Cloud & Orchestration',
+    category: 'Databases & Data Warehousing',
+    icon: '🗄️',
+    color: 'cyan',
+    skills: ['PostgreSQL', 'Snowflake', 'S3'],
+  },
+  {
+    category: 'Cloud & DevOps',
     icon: '☁️',
     color: 'purple',
     skills: [
-      'Azure Data Factory', 'Azure Blob Storage', 'Azure Key Vault',
-      'AWS S3', 'AWS EC2', 'AWS RDS', 'Redshift',
-      'Docker', 'Docker Compose', 'Jenkins', 'CI/CD', 'Git/GitHub',
+      'AWS EC2', 'AWS S3', 'Azure Data Factory', 'Azure Blob Storage',
+      'Docker', 'Docker Compose', 'nginx', 'CI/CD',
     ],
   },
   {
-    category: 'Analytics & BI Tools',
+    category: 'Data Engineering & Visualization',
     icon: '📊',
     color: 'cyan',
-    skills: ['Power BI', 'Tableau', 'Streamlit', 'Matplotlib', 'Seaborn', 'SSE Streaming', 'DAX'],
+    skills: ['ETL/ELT', 'SQL-based Validation', 'Power BI', 'Streamlit', 'Matplotlib', 'Seaborn'],
   },
 ]

@@ -51,30 +51,31 @@ function useCountUp(target: number, inView: boolean, duration = 1400, delay = 0)
 }
 
 const posters = [
-  // Research Foundation for SUNY — navy blue brand
+  // Mediaocean — violet/indigo brand (AI Engineer)
   ({ className }: { className?: string }) => (
     <div className={`w-full h-full flex flex-col items-center justify-center relative overflow-hidden ${className}`}
-      style={{ background: 'linear-gradient(150deg, #001f4d 0%, #003087 50%, #001830 100%)' }}>
-      {/* Background grid lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 220" preserveAspectRatio="none">
-        {[0,1,2,3,4,5,6,7].map(i => <line key={`v${i}`} x1={i*57} y1="0" x2={i*57} y2="220" stroke="#ffffff" strokeWidth="0.5"/>)}
-        {[0,1,2,3,4].map(i => <line key={`h${i}`} x1="0" y1={i*55} x2="400" y2={i*55} stroke="#ffffff" strokeWidth="0.5"/>)}
+      style={{ background: 'linear-gradient(150deg, #0d0015 0%, #1a0030 50%, #0a000f 100%)' }}>
+      {/* Dot grid */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.12]" viewBox="0 0 400 220">
+        {Array.from({ length: 10 }, (_, row) =>
+          Array.from({ length: 18 }, (_, col) => (
+            <circle key={`${row}-${col}`} cx={col * 24 + 8} cy={row * 24 + 4} r="1.2" fill="#a855f7"/>
+          ))
+        )}
       </svg>
-      {/* Glow orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full opacity-15"
-        style={{ background: 'radial-gradient(circle, #4a90d9, transparent 70%)' }} />
+      {/* Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full opacity-12"
+        style={{ background: 'radial-gradient(circle, #a855f7, transparent 70%)' }} />
       {/* Logo text */}
       <div className="relative z-10 text-center px-6">
-        <div className="font-display font-black text-white leading-none mb-2" style={{ fontSize: '3.8rem', letterSpacing: '-0.02em', textShadow: '0 0 40px rgba(74,144,217,0.5)' }}>
-          SUNY
+        <div className="font-display font-black leading-none mb-2" style={{ fontSize: '2.6rem', letterSpacing: '-0.02em', color: '#c084fc', textShadow: '0 0 30px rgba(168,85,247,0.45)' }}>
+          MEDIAOCEAN
         </div>
-        <div className="font-mono text-[11px] text-[#7ab3e8] uppercase tracking-[0.3em] mb-1">Research Foundation</div>
-        <div className="w-12 h-[1px] mx-auto" style={{ background: '#4a90d9' }} />
+        <div className="font-mono text-[10px] text-[#c084fc] uppercase tracking-[0.25em] opacity-70">AI Engineer</div>
       </div>
-      <div className="absolute bottom-4 right-4 font-mono text-[9px] text-[#4a90d9] opacity-50 uppercase tracking-widest">Buffalo, NY</div>
+      <div className="absolute bottom-4 right-4 font-mono text-[9px] text-[#c084fc] opacity-40 uppercase tracking-widest">New York, NY</div>
     </div>
   ),
-
   // New Era Cap — black & red brand
   ({ className }: { className?: string }) => (
     <div className={`w-full h-full flex flex-col items-center justify-center relative overflow-hidden ${className}`}
@@ -106,7 +107,7 @@ const posters = [
     </div>
   ),
 
-  // Mediaocean — teal/cyan brand (Senior DA)
+  // Mediaocean — teal/cyan brand (Senior SWE)
   ({ className }: { className?: string }) => (
     <div className={`w-full h-full flex flex-col items-center justify-center relative overflow-hidden ${className}`}
       style={{ background: 'linear-gradient(150deg, #001a1a 0%, #003333 50%, #001010 100%)' }}>
@@ -125,45 +126,19 @@ const posters = [
         <div className="font-display font-black leading-none mb-2" style={{ fontSize: '2.6rem', letterSpacing: '-0.02em', color: '#00c9b1', textShadow: '0 0 30px rgba(0,201,177,0.4)' }}>
           MEDIAOCEAN
         </div>
-        <div className="font-mono text-[10px] text-[#00c9b1] uppercase tracking-[0.25em] opacity-70">Senior Data Analyst</div>
+        <div className="font-mono text-[10px] text-[#00c9b1] uppercase tracking-[0.25em] opacity-70">Senior Software Engineer</div>
       </div>
       <div className="absolute bottom-4 right-4 font-mono text-[9px] text-[#00c9b1] opacity-40 uppercase tracking-widest">Remote</div>
     </div>
   ),
 
-  // Mediaocean — violet/indigo brand (Data Analyst — visually distinct)
-  ({ className }: { className?: string }) => (
-    <div className={`w-full h-full flex flex-col items-center justify-center relative overflow-hidden ${className}`}
-      style={{ background: 'linear-gradient(150deg, #0d0015 0%, #1a0030 50%, #0a000f 100%)' }}>
-      {/* Dot grid */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.12]" viewBox="0 0 400 220">
-        {Array.from({ length: 10 }, (_, row) =>
-          Array.from({ length: 18 }, (_, col) => (
-            <circle key={`${row}-${col}`} cx={col * 24 + 8} cy={row * 24 + 4} r="1.2" fill="#a855f7"/>
-          ))
-        )}
-      </svg>
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full opacity-12"
-        style={{ background: 'radial-gradient(circle, #a855f7, transparent 70%)' }} />
-      {/* Logo text */}
-      <div className="relative z-10 text-center px-6">
-        <div className="font-display font-black leading-none mb-2" style={{ fontSize: '2.6rem', letterSpacing: '-0.02em', color: '#c084fc', textShadow: '0 0 30px rgba(168,85,247,0.45)' }}>
-          MEDIAOCEAN
-        </div>
-        <div className="font-mono text-[10px] text-[#c084fc] uppercase tracking-[0.25em] opacity-70">Data Analyst</div>
-      </div>
-      <div className="absolute bottom-4 right-4 font-mono text-[9px] text-[#c084fc] opacity-40 uppercase tracking-widest">Remote</div>
-    </div>
-  ),
 ]
 
 // Per-card accent colours matching each company poster
 const CARD_ACCENT = [
-  { color: '#4a90d9', rgb: '74,144,217'  },  // SUNY — blue
+  { color: '#a855f7', rgb: '168,85,247'  },  // Mediaocean AI Engineer — purple
   { color: '#e85d20', rgb: '232,93,32'   },  // New Era Cap — orange-red
-  { color: '#00c9b1', rgb: '0,201,177'   },  // Mediaocean Senior — teal
-  { color: '#a855f7', rgb: '168,85,247'  },  // Mediaocean Data — purple
+  { color: '#00c9b1', rgb: '0,201,177'   },  // Mediaocean Senior SWE — teal
 ]
 
 // Highlight bare numbers / percentages in a description string
@@ -229,7 +204,7 @@ function ExperienceCard({
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ delay: 0.35, duration: 0.4 }}
         >
-          EPISODE {String(i + 1).padStart(2, '0')} · {item.period.slice(-4)}
+          EPISODE {String(i + 1).padStart(2, '0')} · {item.period.match(/\d{4}/)?.[0]}
         </motion.div>
 
         {/* NOW STREAMING badge for current role */}
@@ -406,7 +381,7 @@ export default function Experience() {
         transition={{ delay: 0.2 }}
         className="font-mono text-xs text-[#525252] uppercase tracking-widest mb-10"
       >
-        6 EPISODES · 4 YEARS · RELEASED 2021–2026
+        3 EPISODES · 5+ YEARS · RELEASED 2020–2026
       </motion.p>
 
       <div className="divider mb-10" />

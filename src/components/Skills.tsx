@@ -3,49 +3,46 @@ import { useInView } from 'react-intersection-observer'
 import { skillGroups, SkillGroup } from '../data/skills'
 import { useTilt } from '../hooks/useTilt'
 import {
-  SiPython, SiR, SiPandas, SiNumpy, SiScikitlearn,
-  SiLangchain, SiOpenai, SiAnthropic, SiPydantic, SiHuggingface,
-  SiSnowflake, SiPostgresql, SiMysql, SiApacheairflow, SiFastapi,
-  SiDocker, SiJenkins, SiGithub,
-  SiStreamlit,
+  SiPython,
+  SiLangchain, SiOpenai, SiAnthropic,
+  SiSnowflake, SiPostgresql, SiApacheairflow, SiFastapi,
+  SiDocker, SiJenkins,
+  SiStreamlit, SiOllama, SiNginx, SiReact, SiTypescript, SiJavascript, SiLanggraph,
 } from 'react-icons/si'
 import { FaMicrosoft, FaAws } from 'react-icons/fa6'
 
 type IconComp = React.ComponentType<{ size?: number }>
 
 const SKILL_ICONS: Record<string, IconComp> = {
-  // Programming
+  // Programming & Frameworks
   Python:             SiPython,
-  R:                  SiR,
-  Pandas:             SiPandas,
-  NumPy:              SiNumpy,
-  'Scikit-learn':     SiScikitlearn,
-  // GenAI
-  LangChain:          SiLangchain,
-  'OpenAI API':       SiOpenai,
-  'Claude API':       SiAnthropic,
-  Pydantic:           SiPydantic,
-  'sentence-transformers': SiHuggingface,
-  pgvector:           SiPostgresql,
-  // Data Engineering
-  Snowflake:          SiSnowflake,
-  PostgreSQL:         SiPostgresql,
-  MySQL:              SiMysql,
-  'Apache Airflow':   SiApacheairflow,
+  JavaScript:         SiJavascript,
+  TypeScript:         SiTypescript,
+  React:              SiReact,
   FastAPI:            SiFastapi,
-  // Cloud
+  // AI & LLM
+  'Anthropic Claude': SiAnthropic,
+  OpenAI:             SiOpenai,
+  Ollama:             SiOllama,
+  LangChain:          SiLangchain,
+  LangGraph:          SiLanggraph,
+  pgvector:           SiPostgresql,
+  // ML & Data Science
+  'Apache Airflow':   SiApacheairflow,
+  Jenkins:            SiJenkins,
+  // Databases
+  PostgreSQL:         SiPostgresql,
+  Snowflake:          SiSnowflake,
+  S3:                 FaAws,
+  // Cloud & DevOps
+  'AWS EC2':             FaAws,
+  'AWS S3':              FaAws,
   'Azure Data Factory':  FaMicrosoft,
   'Azure Blob Storage':  FaMicrosoft,
-  'Azure Key Vault':     FaMicrosoft,
-  'AWS S3':              FaAws,
-  'AWS EC2':             FaAws,
-  'AWS RDS':             FaAws,
-  Redshift:              FaAws,
   Docker:                SiDocker,
   'Docker Compose':      SiDocker,
-  Jenkins:               SiJenkins,
-  'Git/GitHub':          SiGithub,
-  // BI
+  nginx:                 SiNginx,
+  // Data Eng & Viz
   'Power BI':            FaMicrosoft,
   Streamlit:             SiStreamlit,
 }
@@ -53,9 +50,10 @@ const SKILL_ICONS: Record<string, IconComp> = {
 const GROUP_META = [
   { color: '#3572A5', rgb: '53,114,165',   num: '01' },
   { color: '#a855f7', rgb: '168,85,247',   num: '02' },
-  { color: '#06b6d4', rgb: '6,182,212',    num: '03' },
-  { color: '#f97316', rgb: '249,115,22',   num: '04' },
-  { color: '#4ade80', rgb: '74,222,128',   num: '05' },
+  { color: '#ec4899', rgb: '236,72,153',   num: '03' },
+  { color: '#06b6d4', rgb: '6,182,212',    num: '04' },
+  { color: '#f97316', rgb: '249,115,22',   num: '05' },
+  { color: '#4ade80', rgb: '74,222,128',   num: '06' },
 ]
 
 function BentoCard({
@@ -200,30 +198,11 @@ export default function Skills() {
 
       {/* Bento grid — 3 equal columns */}
       <div className="grid grid-cols-3 gap-4">
-        {/* Programming */}
-        <div>
-          <BentoCard group={skillGroups[0]} meta={GROUP_META[0]} delay={0.0} />
-        </div>
-
-        {/* GenAI */}
-        <div>
-          <BentoCard group={skillGroups[1]} meta={GROUP_META[1]} delay={0.08} />
-        </div>
-
-        {/* Cloud */}
-        <div>
-          <BentoCard group={skillGroups[3]} meta={GROUP_META[3]} delay={0.14} />
-        </div>
-
-        {/* Data Engineering */}
-        <div>
-          <BentoCard group={skillGroups[2]} meta={GROUP_META[2]} delay={0.20} />
-        </div>
-
-        {/* Analytics & BI */}
-        <div>
-          <BentoCard group={skillGroups[4]} meta={GROUP_META[4]} delay={0.26} />
-        </div>
+        {skillGroups.map((group, i) => (
+          <div key={group.category}>
+            <BentoCard group={group} meta={GROUP_META[i]} delay={[0, 0.08, 0.14, 0.2, 0.26, 0.32][i]} />
+          </div>
+        ))}
       </div>
     </section>
   )

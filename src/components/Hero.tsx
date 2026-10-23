@@ -183,7 +183,7 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
           transition={{ delay: 1.3, duration: 0.6 }}
           className="text-[#a3a3a3] text-sm leading-relaxed mb-8 max-w-lg"
         >
-          An AI/Data Engineer with 4+ years architecting agentic LLM
+          An AI/Data Engineer with 5+ years architecting agentic LLM
           systems, RAG pipelines, and production ETL on Azure and AWS.
           Streaming explainable, auditable AI to non-technical stakeholders
           — and making it land.
@@ -196,7 +196,7 @@ export default function Hero({ introComplete }: { introComplete: boolean }) {
           transition={{ delay: 1.5, duration: 0.5 }}
           className="flex flex-wrap gap-3"
         >
-          <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-primary-nf">
+          <a href="/Resume/Aishvarya_Salvi_AIE.pdf" target="_blank" rel="noreferrer" className="btn-primary-nf">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>

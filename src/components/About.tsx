@@ -25,10 +25,10 @@ function useCountUp(target: number, inView: boolean, duration = 1600, delay = 0)
 }
 
 const stats = [
-  { value: 4,   suffix: '+', label: 'Years of Experience', color: '#cc2200' },
+  { value: 5,   suffix: '+', label: 'Years of Experience', color: '#cc2200' },
   { value: 15,  suffix: '+', label: 'Projects Built',      color: '#3572A5' },
   { value: 450, suffix: '+', label: 'Defects Tracked',     color: '#a855f7' },
-  { value: 87,  suffix: '%', label: 'ML Model Accuracy',   color: '#4ade80' },
+  { value: 93,  suffix: '%', label: 'ML Model Accuracy',   color: '#4ade80' },
 ]
 
 function StatCounter({ stat, inView, index }: { stat: typeof stats[number]; inView: boolean; index: number }) {
@@ -92,7 +92,7 @@ export default function About() {
             className="grid sm:grid-cols-2 gap-8 mb-10 text-sm leading-relaxed text-[#a3a3a3]"
           >
             <p>
-              I'm an AI/Data Engineer with <strong className="text-white">4+ years of experience</strong> shipping
+              I'm an AI/Data Engineer with <strong className="text-white">5+ years of experience</strong> shipping
               agentic LLM systems, RAG pipelines, and production ETL/ELT on Azure and AWS.
               Currently at the Research Foundation for SUNY, I architect supply-chain risk
               agents that procurement teams actually use.
@@ -128,7 +128,7 @@ export default function About() {
             {[
               { href: 'https://github.com/aishwaryasalvi777', label: 'GITHUB ↗' },
               { href: 'https://www.linkedin.com/in/aishvaryasalvi', label: 'LINKEDIN ↗' },
-              { href: '/Aishvarya_Salvi_AIDE_Generic.pdf', label: '↓ DOWNLOAD RESUME', target: '_blank' },
+              { href: '/Resume/Aishvarya_Salvi_AIE.pdf', label: '↓ DOWNLOAD RESUME', target: '_blank' },
             ].map(link => (
               <a
                 key={link.label}
